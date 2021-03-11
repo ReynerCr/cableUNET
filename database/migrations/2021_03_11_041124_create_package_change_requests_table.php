@@ -14,6 +14,7 @@ class CreatePackageChangeRequestsTable extends Migration
     public function up()
     {
         Schema::create('package_change_requests', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('suscription_id');
             $table->foreign('suscription_id')
                 ->references('id')

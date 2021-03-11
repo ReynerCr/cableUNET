@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTvPlansTable extends Migration
+class CreateCableTvServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTvPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('tv_plans', function (Blueprint $table) {
+        Schema::create('cable_tv_services', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20)->unique();
+            $table->string('name', 30)->unique();
+            $table->float('price')->unsigned();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateTvPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tv_plans');
+        Schema::dropIfExists('cable_tv_services');
     }
 }

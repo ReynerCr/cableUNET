@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Services\Tv;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PackageChangeRequest extends Model
+class TvChannel extends Model
 {
     use HasFactory;
+
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $guarded = [
+        'id',
+    ];
 }

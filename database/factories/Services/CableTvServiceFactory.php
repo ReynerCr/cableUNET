@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Services;
 
-use App\Models\CableTvServices;
+use App\Models\Services\CableTvService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CableTvServicesFactory extends Factory
+class CableTvServiceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CableTvServices::class;
+    protected $model = CableTvService::class;
 
     /**
      * Define the model's default state.

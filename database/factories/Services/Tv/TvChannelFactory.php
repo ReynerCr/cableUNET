@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Services\Tv;
 
 use App\Models\TvChannel;
 use Illuminate\Database\Eloquent\Factories\Factory;

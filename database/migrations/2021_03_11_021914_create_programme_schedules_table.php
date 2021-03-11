@@ -15,10 +15,10 @@ class CreateProgrammeSchedulesTable extends Migration
     {
         Schema::create('programme_schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('channel_id');
+            $table->unsignedBigInteger('tv_channel_id');
             $table->timestamp('starts');
             $table->string('tv_show_name', 50);
-            $table->foreign('channel_id')
+            $table->foreign('tv_channel_id')
                 ->references('id')
                 ->on('tv_channels')
                 ->cascadeOnDelete();

@@ -18,22 +18,22 @@ class CreateServicePackagesTable extends Migration
             $table->string('name', 30)->unique();
             $table->float('price')->unsigned();
 
-            $table->unsignedBigInteger('internet_id')->nullable();
-            $table->foreign('internet_id')
+            $table->unsignedBigInteger('internet_service_id')->nullable();
+            $table->foreign('internet_service_id')
                 ->references('id')
                 ->on('internet_services')
                 ->nullOnDelete();
 
-            $table->unsignedBigInteger('telephony_id')->nullable();
-            $table->foreign('telephony_id')
+            $table->unsignedBigInteger('telephony_service_id')->nullable();
+            $table->foreign('telephony_service_id')
                 ->references('id')
                 ->on('telephony_services')
                 ->nullOnDelete();
 
-            $table->unsignedBigInteger('tv_plan_id')->nullable();
-            $table->foreign('tv_plan_id')
+            $table->unsignedBigInteger('cable_tv_service_id')->nullable();
+            $table->foreign('cable_tv_service_id')
                 ->references('id')
-                ->on('tv_plans')
+                ->on('cable_tv_services')
                 ->nullOnDelete();
         });
     }

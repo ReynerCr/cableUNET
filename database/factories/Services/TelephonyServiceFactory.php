@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Services;
 
-use App\Models\ProgrammeSchedule;
+use App\Models\TelephonyService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProgrammeScheduleFactory extends Factory
+class TelephonyServiceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ProgrammeSchedule::class;
+    protected $model = TelephonyService::class;
 
     /**
      * Define the model's default state.

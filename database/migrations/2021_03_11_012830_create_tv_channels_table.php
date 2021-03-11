@@ -15,8 +15,8 @@ class CreateTvChannelsTable extends Migration
     {
         Schema::create('tv_channels', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 30);
-            $table->string('description', 200);
+            $table->string('name', 30)->unique();
+            $table->string('description', 150);
         });
     }
 

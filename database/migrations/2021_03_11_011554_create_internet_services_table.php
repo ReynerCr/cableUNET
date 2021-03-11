@@ -15,8 +15,10 @@ class CreateInternetServicesTable extends Migration
     {
         Schema::create('internet_services', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 30)->unique();
             $table->integer('download_speed')->unsigned();
             $table->integer('upload_speed')->unsigned();
+            $table->float('price')->unsigned();
         });
     }
 

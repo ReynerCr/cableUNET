@@ -15,7 +15,9 @@ class CreateTelephonyServicesTable extends Migration
     {
         Schema::create('telephony_services', function (Blueprint $table) {
             $table->id();
-            $table->integer('minutes')->unsigned()->unique();
+            $table->string('name', 30)->unique();
+            $table->integer('minutes')->unsigned();
+            $table->float('price')->unsigned();
         });
     }
 
