@@ -22,7 +22,9 @@ class TelephonyServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->name,
+            'minutes' => $this->faker->numberBetween(1, 1000),
+            'price' => $this->faker->randomFloat(2, 1, 100),
         ];
     }
 }

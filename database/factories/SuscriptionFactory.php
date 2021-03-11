@@ -22,7 +22,8 @@ class SuscriptionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 20),
+            'service_package_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

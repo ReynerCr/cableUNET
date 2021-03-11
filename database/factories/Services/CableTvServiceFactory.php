@@ -22,7 +22,8 @@ class CableTvServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->name(1),
+            'price' => $this->faker->randomFloat(2, 1, 100),
         ];
     }
 }

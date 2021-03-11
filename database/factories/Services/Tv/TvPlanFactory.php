@@ -22,7 +22,8 @@ class TvPlanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'tv_channel_id' => $this->faker->randomNumber(1, 30),
+            'cable_tv_service_id' => $this->faker->randomNumber(1, 5),
         ];
     }
 }

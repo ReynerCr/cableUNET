@@ -22,7 +22,8 @@ class TvChannelFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->sentence(1),
+            'description' => $this->faker->sentence(10),
         ];
     }
 }

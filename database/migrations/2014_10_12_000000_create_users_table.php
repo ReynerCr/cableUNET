@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('surname', 100);
             $table->string('id_card', 9)->unique();
             $table->string('email', 50)->unique();
-            $table->string('password', 32);
-            $table->string('phone_number', 15);
+            $table->string('password');
+            $table->string('phone_number', 20);
             $table->string('address', 200);
             $table->rememberToken();
             $table->timestamps();

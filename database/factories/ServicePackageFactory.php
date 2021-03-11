@@ -22,7 +22,11 @@ class ServicePackageFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->name,
+            'price' => $this->faker->randomFloat(1, 100),
+            'internet_service_id' => $this->faker->randomNumber(0, 5),
+            'telephony_service_id' => $this->faker->randomNumber(0, 5),
+            'cable_tv_service_id' => $this->faker->randomNumber(0, 5),
         ];
     }
 }

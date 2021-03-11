@@ -22,7 +22,7 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            //TODO hay problemas creo con la relacion entre usuario, suscripcion y factura
         ];
     }
 }

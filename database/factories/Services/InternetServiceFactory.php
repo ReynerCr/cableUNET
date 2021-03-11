@@ -22,7 +22,10 @@ class InternetServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->name,
+            'download_speed' => $this->faker->numberBetween(1, 100),
+            'upload_speed' => $this->faker->numberBetween(1, 10),
+            'price' => $this->faker->randomFloat(2, 1, 100),
         ];
     }
 }
