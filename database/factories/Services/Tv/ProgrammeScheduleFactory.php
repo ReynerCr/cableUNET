@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Services\Tv;
 
-use App\Models\ProgrammeSchedule;
+use App\Models\Services\Tv\ProgrammeSchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProgrammeScheduleFactory extends Factory
@@ -22,8 +22,8 @@ class ProgrammeScheduleFactory extends Factory
     public function definition()
     {
         return [
-            'tv_channel_id' => $this->faker->unique()->numberBetween(1, 30),
-            'starts' => $this->faker->unique()->dateTime('now', '7 days'),
+            'tv_channel_id' => $this->faker->numberBetween(1, 30),
+            'starts' => $this->faker->unique()->dateTime('now', '+7 days'),
             'tv_show_name' => $this->faker->sentence(3),
         ];
     }

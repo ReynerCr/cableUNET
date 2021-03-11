@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TvPlan extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     /**
      * The attributes that are not mass assignable.
      *

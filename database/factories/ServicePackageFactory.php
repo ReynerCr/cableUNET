@@ -23,10 +23,10 @@ class ServicePackageFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->name,
-            'price' => $this->faker->randomFloat(1, 100),
-            'internet_service_id' => $this->faker->randomNumber(0, 5),
-            'telephony_service_id' => $this->faker->randomNumber(0, 5),
-            'cable_tv_service_id' => $this->faker->randomNumber(0, 5),
+            'price' => $this->faker->randomFloat(2, 1, 100),
+            'internet_service_id' => $this->faker->numberBetween(1, 5),
+            'telephony_service_id' => $this->faker->numberBetween(1, 5),
+            'cable_tv_service_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

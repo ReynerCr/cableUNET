@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Services;
 
-use App\Models\InternetService;
+use App\Models\Services\InternetService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InternetServiceFactory extends Factory

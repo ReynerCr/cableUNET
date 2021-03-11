@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Services\Tv;
 
-use App\Models\TvPlan;
+use App\Models\Services\Tv\TvPlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TvPlanFactory extends Factory
@@ -21,9 +21,10 @@ class TvPlanFactory extends Factory
      */
     public function definition()
     {
+        $str = explode(' ', $this->faker->unique()->regexify('[1-5] [0-2][1-9]'));
         return [
-            'tv_channel_id' => $this->faker->randomNumber(1, 30),
-            'cable_tv_service_id' => $this->faker->randomNumber(1, 5),
+            'cable_tv_service_id' => intval($str[0]),
+            'tv_channel_id' => intval($str[1]),
         ];
     }
 }

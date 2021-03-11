@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Services\Tv;
 
-use App\Models\TvChannel;
+use App\Models\Services\Tv\TvChannel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TvChannelFactory extends Factory

@@ -14,19 +14,19 @@ class CreateTvPlansTable extends Migration
     public function up()
     {
         Schema::create('tv_plans', function (Blueprint $table) {
-            $table->unsignedBigInteger('tv_channel_id');
-            $table->foreign('tv_channel_id')
-                ->references('id')
-                ->on('tv_channels')
-                ->cascadeOnDelete();
-
             $table->unsignedBigInteger('cable_tv_service_id');
             $table->foreign('cable_tv_service_id')
                 ->references('id')
                 ->on('cable_tv_services')
                 ->cascadeOnDelete();
 
-            $table->primary(['tv_channel_id', 'cable_tv_service_id']);
+            $table->unsignedBigInteger('tv_channel_id');
+            $table->foreign('tv_channel_id')
+                ->references('id')
+                ->on('tv_channels')
+                ->cascadeOnDelete();
+
+            $table->primary(['cable_tv_service_id', 'tv_channel_id']);
         });
     }
 
