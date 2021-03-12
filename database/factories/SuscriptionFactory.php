@@ -21,9 +21,12 @@ class SuscriptionFactory extends Factory
      */
     public function definition()
     {
+        $date = $this->faker->dateTimeBetween('-10 day' );
         return [
             'user_id' => $this->faker->numberBetween(1, 20),
             'service_package_id' => $this->faker->numberBetween(1, 10),
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }

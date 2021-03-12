@@ -22,8 +22,8 @@ class PackageChangeRequestFactory extends Factory
     public function definition()
     {
         return [
-            'suscription_id' => $this->faker->numberBetween(1, 30),
-            'new_service_package_id' => $this->faker->numberBetween(1, 10),
+            'suscription_id' => $this->faker->unique()->numberBetween(1, 15),
+            'new_sp_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

@@ -15,12 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        /* $tableArray = array(); // table which would be truncated
-
-        // users related
-        $this->addUser($tableArray);
-        $this->addServices($tableArray);
-        $this->addTvService($tableArray); */
         $tableArray = [
             'users',
             'internet_services',
@@ -76,6 +70,14 @@ class DatabaseSeeder extends Seeder
         $max = 10;
         for ($i = 0; $i < $max; $i++) {
             \App\Models\ServicePackage::factory()->create();
+        }
+        $max = 15;
+        for ($i = 0; $i < $max; $i++) {
+            \App\Models\Suscription::factory()->create();
+        }
+        $max = 5;
+        for ($i = 0; $i < $max; $i++) {
+            \App\Models\PackageChangeRequest::factory()->create();
         }
     }
 
