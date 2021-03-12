@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('surname', 100);
             $table->string('id_card', 9)->unique();
             $table->string('email', 50)->unique();
+            $table->timestamp('email_verified_at')->useCurrent();
             $table->string('password');
             $table->string('phone_number', 20);
             $table->string('address', 200);
