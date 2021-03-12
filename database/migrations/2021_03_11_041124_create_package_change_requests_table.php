@@ -21,8 +21,8 @@ class CreatePackageChangeRequestsTable extends Migration
                 ->on('suscriptions')
                 ->cascadeOnDelete();
 
-            $table->unsignedBigInteger('new_service_package_id');
-            $table->foreign('new_service_package_id')
+            $table->unsignedBigInteger('new_sp_id');
+            $table->foreign('new_sp_id')
                 ->references('id')
                 ->on('service_packages')
                 ->cascadeOnDelete();
