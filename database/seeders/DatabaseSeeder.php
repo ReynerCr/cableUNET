@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->truncateTables($tableArray);
 
         \App\Models\User::factory(User::class)->create([
-            'name' => 'Reyner Contreras',
+            'name' => 'Reyner',
+            'surname' => 'Contreras',
             'email' => 'reynercontreras0@gmail.com',
             'id_card' => '26934400',
             'password' => bcrypt('laravel'),

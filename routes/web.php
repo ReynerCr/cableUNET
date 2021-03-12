@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/usuarios', [UserController::class, 'index'])
+    ->name('users');
+
+Route::get('/usuarios/{user}', [UserController::class, 'show'])
+    ->where('user', '[0-9]+')
+    ->name('users.show');
+
+Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
+    ->where('user', '[0-9]+')
+    ->name('users.edit');
+
+Route::get('/usuarios/nuevo', [UserController::class, 'new'])
+    ->name('users.new');
+
+Route::get('saludo/{name}/{nickname}', [WelcomeUserController::class, 'greetingWithNickname']);
+Route::get('saludo/{name}', [WelcomeUserController::class, 'greetingWithoutNickname']);
