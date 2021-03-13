@@ -18,12 +18,14 @@ class CreateSuscriptionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->cascadeOnDelete();
 
             $table->unsignedBigInteger('service_package_id');
             $table->foreign('service_package_id')
                 ->references('id')
-                ->on('service_packages');
+                ->on('service_packages')
+                ->cascadeOnDelete();
         });
     }
 
