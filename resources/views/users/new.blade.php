@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Crear usuario')
+@section('title', 'Crear nuevo usuario')
 
 @section('content')
 <h1>Crear nuevo usuario: </h1>
@@ -30,10 +30,10 @@
     <input type="email" placeholder="prueba@ejemplo.com" maxlength="50" id="email" name="email" value = {{ old('email') }}><br>
 
     <label for="password">Contraseña: </label>
-    <input type="password" placeholder="Mayor a 6 caracteres" id="password" name="password" value = {{ old('password') }}><br>
+    <input type="password" placeholder="Entre 6 y 16 caracteres" id="password" name="password"><br>
 
     <label for="phone_number">Teléfono: </label>
-    <input type="tel" placeholder="1234-567-8910" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" id="phone_number"
+    <input type="tel" placeholder="1234-567-8910" id="phone_number"
         name="phone_number" value = {{ old('phone_number') }}><br>
 
     <label for="address">Dirección </label>

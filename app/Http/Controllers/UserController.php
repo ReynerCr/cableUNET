@@ -33,21 +33,13 @@ class UserController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'id_card' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-        ], [
-            'name.required' => 'El campo nombre es obligatorio',
-            'surname.required' => 'El campo apellido es obligatorio',
-            'id_card.required' => 'El campo cédula es obligatorio',
-            'email.required' => 'El campo es email obligatorio',
-            'password.required' => 'El campo contraseña es obligatorio',
-            'phone_number.required' => 'El campo teléfono es obligatorio',
-            'address.required' => 'El campo dirección es obligatorio',
+            'name' => 'bail|required|alpha|between:5,100',
+            'surname' => 'bail|required|alpha|between:2,100',
+            'id_card' => 'bail|required|numeric|digits_between:1,8|unique:users,id_card',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'bail|required|alpha_dash|between:6,16',
+            'phone_number' => 'bail|required|numeric|size:8',
+            'address' => 'required|between:5,200',
         ]);
 
         User::create([

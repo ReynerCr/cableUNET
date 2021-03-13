@@ -6,13 +6,16 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use Carbon\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserModuleTest extends TestCase
 {
+    // The tests needs to be executed with a clean DB, preferably a test DB.
     use WithFaker;
     //use RefreshDatabase;
     use DatabaseTransactions;
+
     /** @test */
     function it_shows_the_users_list()
     {
@@ -87,7 +90,6 @@ class UserModuleTest extends TestCase
             ->assertStatus(404)
             ->assertSee('Página no encontrada.');
     }
-
     /** @test */
     function it_displays_a_404_error_if_the_user_is_not_found()
     {
@@ -95,7 +97,6 @@ class UserModuleTest extends TestCase
             ->assertStatus(404)
             ->assertSee('Página no encontrada.');
     }
-
     /** @test */
     function it_creates_a_new_user()
     {
@@ -120,7 +121,6 @@ class UserModuleTest extends TestCase
             'address' => 'la papaya estaba buena...',
         ]);
     }
-
     /** @test */
     function the_name_is_required()
     {
@@ -139,8 +139,29 @@ class UserModuleTest extends TestCase
                 'name' => 'El campo nombre es obligatorio',
             ]);
 
-        $this->assertDatabaseMissing('users', [
-            'email' => 'roy@outlook.com',
+        $this->assertEquals(0, User::count());
+    }
+    /** @test */
+    function the_email_must_be_unique()
+    {
+        User::factory(User::class)->create([
+            'email' => 'reynercontreras0@gmail.com',
         ]);
+
+        $this->from(route('users.new'))
+            ->post(route('users.create'), [
+                'name' => 'reyner',
+                'surname' => 'Contreras',
+                'id_card' => '50pepes',
+                'email' => 'reynercontreras0@gmail.com',
+                'password' => 'contrasena',
+                'phone_number' => '12465478',
+                'address' => 'la papaya estaba buena...',
+            ])
+            ->assertRedirect(route('users.new'))
+            ->assertSessionHasErrors([
+                'email',
+            ]);
+        $this->assertEquals(1, User::count());
     }
 }
