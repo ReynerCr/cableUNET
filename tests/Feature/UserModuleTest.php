@@ -99,7 +99,8 @@ class UserModuleTest extends TestCase
     /** @test */
     function it_creates_a_new_user()
     {
-        $this->post('/usuarios/registrar', [
+        $this->withoutExceptionHandling();
+        $this->post(route('users.create'), [
             'name' => 'Royner',
             'surname' => 'Contreras',
             'id_card' => '21222122',
@@ -117,6 +118,29 @@ class UserModuleTest extends TestCase
             'password' => 'contrasena',
             'phone_number' => '12465478',
             'address' => 'la papaya estaba buena...',
+        ]);
+    }
+
+    /** @test */
+    function the_name_is_required()
+    {
+        $this->from(route('users.new'))
+            ->post(route('users.create'), [
+                'name' => '',
+                'surname' => 'Contreras',
+                'id_card' => '21222122',
+                'email' => 'roy@outlook.com',
+                'password' => 'contrasena',
+                'phone_number' => '12465478',
+                'address' => 'la papaya estaba buena...',
+            ])
+            ->assertRedirect(route('users.new'))
+            ->assertSessionHasErrors([
+                'name' => 'El campo nombre es obligatorio',
+            ]);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'roy@outlook.com',
         ]);
     }
 }
