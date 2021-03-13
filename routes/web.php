@@ -33,5 +33,7 @@ Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
 Route::get('/usuarios/nuevo', [UserController::class, 'new'])
     ->name('users.new');
 
+Route::post('/usuarios/registrar', [UserController::class, 'store']);
+
 Route::get('saludo/{name}/{nickname}', [WelcomeUserController::class, 'greetingWithNickname']);
 Route::get('saludo/{name}', [WelcomeUserController::class, 'greetingWithoutNickname']);

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserModuleTest extends TestCase
 {
+    use WithFaker;
     //use RefreshDatabase;
     use DatabaseTransactions;
     /** @test */
@@ -93,5 +94,29 @@ class UserModuleTest extends TestCase
         $this->get(route('users.show', 404))
             ->assertStatus(404)
             ->assertSee('Página no encontrada.');
+    }
+
+    /** @test */
+    function it_creates_a_new_user()
+    {
+        $this->post('/usuarios/registrar', [
+            'name' => 'Royner',
+            'surname' => 'Contreras',
+            'id_card' => '21222122',
+            'email' => 'roy@outlook.com',
+            'password' => 'contrasena',
+            'phone_number' => '12465478',
+            'address' => 'la papaya estaba buena...',
+        ])->assertRedirect(route('users'));
+
+        $this->assertCredentials([
+            'name' => 'Royner',
+            'surname' => 'Contreras',
+            'id_card' => '21222122',
+            'email' => 'roy@outlook.com',
+            'password' => 'contrasena',
+            'phone_number' => '12465478',
+            'address' => 'la papaya estaba buena...',
+        ]);
     }
 }
