@@ -8,6 +8,6 @@
     <p>Correo electrónico: {{ $user->email }}</p>
     <p>C.I: V {{ $user->id_card }}</p>
 
-    <a href="{{ route('users') }}">Regresar al listado de usuarios</a>
-    <a href="{{ route('users.edit', $user->id) }}">Editar usuario</a>
+    <a href="{{ route('users.index') }}">Regresar al listado de usuarios</a>
+    <a href="{{ route('users.edit', $user) }}">Editar usuario</a>
 @endsection

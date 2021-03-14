@@ -8,6 +8,11 @@ use \App\Models\User;
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $users = User::all();
@@ -16,6 +21,12 @@ class UserController extends Controller
         return view('users.index', compact('users', 'title'));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show(User $user)
     {
         return view('users.show', compact('user'));
@@ -26,6 +37,12 @@ class UserController extends Controller
         return view('users.new');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store()
     {
         $data = request()->validate([
@@ -81,7 +98,7 @@ class UserController extends Controller
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
         ]);
-        return redirect(route('users'));
+        return redirect(route('users.index'));
     }
 
     public function edit(User $user)
@@ -89,6 +106,13 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(User $user)
     {
         $data = request()->validate([
@@ -142,6 +166,18 @@ class UserController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('users.show', $user->id);
+        return redirect(route('users.show', $user));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect(route('users.index'));
     }
 }

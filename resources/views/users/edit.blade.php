@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('users.show', $user->id) }}">
+<form method="POST" action="{{ route('users.show', $user) }}">
     {{ method_field('PUT') }}
     {{ csrf_field() }}
     <label for="name">Nombres: </label>
@@ -25,7 +25,7 @@
     <input type="text" placeholder="Perez Toledo" maxlength="100" id="surname" id="surname" required name="surname" value = {{ old('surname', $user->surname) }}><br>
 
     <label for="id_card">Cédula de identidad: </label>
-    <input type="text" placeholder="V.-12345678" maxlength="9" id="id_card" name="id_card" required value = {{ old('id_card', $user->id_card) }}><br>
+    <input type="number" placeholder="V.-12345678" maxlength="9" id="id_card" name="id_card" required value = {{ old('id_card', $user->id_card) }}><br>
 
     <label for="email">Correo electrónico: </label>
     <input type="email" placeholder="prueba@ejemplo.com" maxlength="50" id="email" name="email" required value = {{ old('email', $user->email) }}><br>
@@ -41,5 +41,5 @@
     <textarea rows="4" cols="50" placeholder="Ingrese aquí su dirección." id="address" name="address" required>{{ old('address', $user->address) }}</textarea><br>
     <button type="submit">Actualizar usuario</button>
 </form>
-<a href="{{ route('users') }}">Regresar al listado de usuarios</a>
+<a href="{{ route('users.index') }}">Regresar al listado de usuarios</a>
 @endsection

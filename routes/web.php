@@ -20,19 +20,19 @@ Route::get('/', function () {
 });
 
 Route::get('/usuarios', [UserController::class, 'index'])
-    ->name('users');
+    ->name('users.index');
 
 Route::get('/usuarios/{user}', [UserController::class, 'show'])
     ->where('user', '[0-9]+')
     ->name('users.show');
 
+Route::put('/usuarios/{user}', [UserController::class, 'update'])
+    ->where('user', '[0-9]+')
+    ->name('users.update');
+
 Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
     ->where('user', '[0-9]+')
     ->name('users.edit');
-
-Route::put('/usuarios/{user}', [UserController::class, 'update'])
-    ->where('user', '[0-9]+')
-    ->name('users.show');
 
 Route::get('/usuarios/nuevo', [UserController::class, 'new'])
     ->name('users.new');
@@ -40,5 +40,6 @@ Route::get('/usuarios/nuevo', [UserController::class, 'new'])
 Route::post('/usuarios/registrar', [UserController::class, 'store'])
     ->name('users.create');
 
-Route::get('saludo/{name}/{nickname}', [WelcomeUserController::class, 'greetingWithNickname']);
-Route::get('saludo/{name}', [WelcomeUserController::class, 'greetingWithoutNickname']);
+Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])
+    ->where('user', '[0-9]+')
+    ->name('users.destroy');

@@ -40,5 +40,5 @@
     <textarea rows="4" cols="50" placeholder="Ingrese aquí su dirección." id="address" name="address" required>{{ old('address') }}</textarea><br>
     <button type="submit">Crear usuario</button>
 </form>
-<a href="{{ route('users') }}">Regresar al listado de usuarios</a>
+<a href="{{ route('users.index') }}">Regresar al listado de usuarios</a>
 @endsection
