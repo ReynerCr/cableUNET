@@ -30,6 +30,10 @@ Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
     ->where('user', '[0-9]+')
     ->name('users.edit');
 
+Route::put('/usuarios/{user}', [UserController::class, 'update'])
+    ->where('user', '[0-9]+')
+    ->name('users.show');
+
 Route::get('/usuarios/nuevo', [UserController::class, 'new'])
     ->name('users.new');
 

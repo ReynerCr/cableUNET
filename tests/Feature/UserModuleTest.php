@@ -78,10 +78,11 @@ class UserModuleTest extends TestCase
 
         $this->get(route('users.edit', $user->id))
             ->assertStatus(200)
-            ->assertSee('Editar usuario con id')
-            ->assertSee('Reyner.')
-            ->assertSee('Contreras.')
-            ->assertSee('V26934400');
+            ->assertViewIs('users.edit')
+            ->assertSee('Editar usuario')
+            ->assertViewHas('user', function ($viewUser) use ($user) {
+                return $viewUser->id == $user->id;
+            });
     }
     /** @test */
     function it_doesnt_edits_a_user_with_text_page()
@@ -100,26 +101,17 @@ class UserModuleTest extends TestCase
     /** @test */
     function it_creates_a_new_user()
     {
-        $this->withoutExceptionHandling();
         $this->post(route('users.create'), [
-            'name' => 'Royner',
+            'name' => 'Reyner',
             'surname' => 'Contreras',
-            'id_card' => '21222122',
-            'email' => 'roy@outlook.com',
+            'id_card' => '269',
+            'email' => 'reynercontreras0@gmail.com',
             'password' => 'contrasena',
-            'phone_number' => '12465478',
+            'phone_number' => '12346547891',
             'address' => 'la papaya estaba buena...',
         ])->assertRedirect(route('users'));
 
-        $this->assertCredentials([
-            'name' => 'Royner',
-            'surname' => 'Contreras',
-            'id_card' => '21222122',
-            'email' => 'roy@outlook.com',
-            'password' => 'contrasena',
-            'phone_number' => '12465478',
-            'address' => 'la papaya estaba buena...',
-        ]);
+        $this->assertEquals(1, User::count());
     }
     /** @test */
     function the_name_is_required()
@@ -128,15 +120,15 @@ class UserModuleTest extends TestCase
             ->post(route('users.create'), [
                 'name' => '',
                 'surname' => 'Contreras',
-                'id_card' => '21222122',
-                'email' => 'roy@outlook.com',
+                'id_card' => '123',
+                'email' => 'reynercontreras0@gmail.com',
                 'password' => 'contrasena',
-                'phone_number' => '12465478',
+                'phone_number' => '12346547891',
                 'address' => 'la papaya estaba buena...',
             ])
             ->assertRedirect(route('users.new'))
             ->assertSessionHasErrors([
-                'name' => 'El campo nombre es obligatorio',
+                'name'
             ]);
 
         $this->assertEquals(0, User::count());
@@ -152,10 +144,10 @@ class UserModuleTest extends TestCase
             ->post(route('users.create'), [
                 'name' => 'reyner',
                 'surname' => 'Contreras',
-                'id_card' => '50pepes',
+                'id_card' => '123',
                 'email' => 'reynercontreras0@gmail.com',
                 'password' => 'contrasena',
-                'phone_number' => '12465478',
+                'phone_number' => '12346547891',
                 'address' => 'la papaya estaba buena...',
             ])
             ->assertRedirect(route('users.new'))
@@ -163,5 +155,127 @@ class UserModuleTest extends TestCase
                 'email',
             ]);
         $this->assertEquals(1, User::count());
+    }
+    /** @test */
+    function it_updates_a_user()
+    {
+        $user = User::factory(User::class)->create();
+        $this->put(route('users.show', $user->id), [
+            'name' => 'Reyner',
+            'surname' => 'Contreras',
+            'id_card' => '123',
+            'email' => 'reynercontreras0@gmail.com',
+            'password' => 'contrasena',
+            'phone_number' => '12346547891',
+            'address' => 'la papaya estaba buena...',
+        ])->assertRedirect(route('users.show', $user->id));
+
+        $this->assertCredentials([
+            'name' => 'Reyner',
+            'surname' => 'Contreras',
+            'id_card' => '123',
+            'email' => 'reynercontreras0@gmail.com',
+            'password' => 'contrasena',
+            'phone_number' => '12346547891',
+            'address' => 'la papaya estaba buena...',
+        ]);
+    }
+    /** @test */
+    function the_name_is_required_when_updating_a_user()
+    {
+        $user = User::factory(User::class)->create();
+        $this->from(route('users.edit', $user->id))
+            ->put(route('users.show', $user->id), [
+                'name' => '',
+                'surname' => 'Contreras',
+                'id_card' => '123',
+                'email' => 'reynercontreras0@gmail.com',
+                'password' => 'contrasena',
+                'phone_number' => '1234654789',
+                'address' => 'la papaya estaba buena...',
+            ])->assertRedirect(route('users.edit', $user->id))
+            ->assertSessionHasErrors(['name']);
+
+        $this->assertDatabaseMissing('users', ['email' => 'reynercontreras0@gmail.com']);
+    }
+    /** @test */
+    function the_email_must_be_unique_when_updating()
+    {
+        $user = User::factory(User::class)->create([
+            'email' => 'reynercontreras@gmail.com',
+        ]);
+
+        User::factory(User::class)->create([
+            'email' => 'reynercontreras0@gmail.com',
+        ]);
+
+        $this->from(route('users.edit', $user->id))
+            ->put(route('users.show', $user->id), [
+                'name' => 'Reyner',
+                'surname' => 'Contreras',
+                'id_card' => '123',
+                'email' => 'reynercontreras0@gmail.com',
+                'password' => 'contrasena',
+                'phone_number' => '12346547891',
+                'address' => 'la papaya estaba buena...',
+            ])->assertRedirect(route('users.edit', $user->id))
+            ->assertSessionHasErrors(['email']);
+    }
+    /** @test */
+    function the_password_is_optional_when_updating_a_user()
+    {
+        $oldPassword = 'oldpassword';
+        $user = User::factory(User::class)->create([
+            'password' =>  bcrypt($oldPassword),
+        ]);
+        $this->from(route('users.edit', $user->id))
+            ->put(route('users.show', $user->id), [
+                'name' => 'Reyner',
+                'surname' => 'Contreras',
+                'id_card' => '123',
+                'email' => 'reynercontreras0@gmail.com',
+                'password' => '',
+                'phone_number' => '12346547891',
+                'address' => 'la papaya estaba buena...',
+            ])->assertRedirect(route('users.show', $user->id));
+
+        $this->assertCredentials([
+            'name' => 'Reyner',
+            'surname' => 'Contreras',
+            'id_card' => '123',
+            'email' => 'reynercontreras0@gmail.com',
+            'password' => $oldPassword,
+            'phone_number' => '12346547891',
+            'address' => 'la papaya estaba buena...',
+        ]);
+    }
+    /** @test */
+    function the_email_and_id_card_can_stay_the_same_when_updating_a_user()
+    {
+        $user = User::factory(User::class)->create([
+            'id_card' => '123',
+            'email' => 'reynercontreras0@gmail.com',
+        ]);
+
+        $this->from(route('users.edit', $user->id))
+            ->put(route('users.show', $user->id), [
+                'name' => 'Reyner',
+                'surname' => 'Contreras',
+                'id_card' => '123',
+                'email' => 'reynercontreras0@gmail.com',
+                'password' => '123456',
+                'phone_number' => '12346547891',
+                'address' => 'la papaya estaba buena...',
+            ])->assertRedirect(route('users.show', $user->id));
+
+        $this->assertCredentials([
+            'name' => 'Reyner',
+            'surname' => 'Contreras',
+            'id_card' => '123',
+            'email' => 'reynercontreras0@gmail.com',
+            'password' => '123456',
+            'phone_number' => '12346547891',
+            'address' => 'la papaya estaba buena...',
+        ]);
     }
 }

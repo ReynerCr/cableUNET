@@ -9,4 +9,5 @@
     <p>C.I: V {{ $user->id_card }}</p>
 
     <a href="{{ route('users') }}">Regresar al listado de usuarios</a>
+    <a href="{{ route('users.edit', $user->id) }}">Editar usuario</a>
 @endsection
