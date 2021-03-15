@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('admin.users.id.show', $user) }}">
+<form method="POST" action="{{ route($authprefix.'.id.show', $user) }}">
     {{ method_field('PUT') }}
     {{ csrf_field() }}
     <fieldset>
@@ -58,7 +58,10 @@
                 name="address" required>{{ old('address', $user->address) }}</textarea><br>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar usuario</button>
-        <a href="{{ route('admin.users') }}" class="btn btn-link">Regresar al listado de usuarios</a>
+
+        @if ($user->isAdmin())
+        <a href="{{ route($authprefix) }}" class="btn btn-link">Regresar al listado de usuarios</a>
+        @endif
     </fieldset>
 </form>
 @endsection

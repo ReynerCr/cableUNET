@@ -17,12 +17,12 @@ class UserCanSee
      */
     public function handle(Request $request, Closure $next)
     {
-        $requestedId = $request->user;
-        if(! Auth::user()->id == $requestedId) {
+        $requestedId = $request->route('user');
+        if(Auth::user()->id == $requestedId->id) {
             return $next($request);
         }
         else {
-            return redirect(route('user.home'));
+            return redirect(route('client.home'));
         }
     }
 }

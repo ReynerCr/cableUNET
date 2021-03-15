@@ -24,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect(Auth::user()->is_admin ? route('admin.home'):route('user.home'));
+        return redirect(Auth::user()->is_admin ? route('admin.home'):route('client.home'));
     }
 }

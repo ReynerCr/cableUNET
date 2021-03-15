@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -17,12 +17,33 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home');
+
 Route::get('/', function () {
     return redirect(route('home'));
 });
 
+Auth::routes();
+
+Route::prefix('/cliente')->name('client')->group(function () {
+    // /cliente as client
+    Route::get('', [ClientController::class, 'home'])
+        ->name('.home');
+    Route::prefix('{user}')->where(['[0-9]+'])->name('.id')->group(function () {
+        // /cliente/{user} as client.id
+        Route::get('', [ClientController::class, 'show'])
+            ->name('.show');
+        Route::put('', [ClientController::class, 'update'])
+            ->name('.update');
+        Route::get('editar', [ClientController::class, 'edit'])
+            ->name('.edit');
+    });
+});
+
 Route::prefix('/administrador')->name('admin')->group(function () {
-    Route::get('', [AdminController::class, 'home']);
+    Route::get('', [AdminController::class, 'home'])
+        ->name('.home');
 
     Route::prefix('usuarios')->name('.users')->group(function () {
         // /administrador/usuarios as admin.users
@@ -45,27 +66,3 @@ Route::prefix('/administrador')->name('admin')->group(function () {
         });
     });
 });
-
-/* Route::get('/usuarios/{user}', [UserController::class, 'show'])
-    ->where('user', '[0-9]+')
-    ->name('users.show');
-
-Route::put('/usuarios/{user}', [UserController::class, 'update'])
-    ->where('user', '[0-9]+')
-    ->name('users.update');
-
-Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
-    ->where('user', '[0-9]+')
-    ->name('users.edit'); */
-
-
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])
-    ->name('home');
-
-Route::get('/administrador', [AdminController::class, 'home'])
-    ->name('admin.home');
-Route::get('/usuario', [UserController::class, 'home'])
-    ->name('user.home');

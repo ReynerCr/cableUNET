@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use \App\Models\User;
 
-class AdminController extends Controller
+class AdminController extends UserController
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        parent::__construct(); // auth
         $this->middleware('isadmin');
     }
-
     public function home()
     {
-        return view('admin');
+        return view('admin.index');
     }
     /**
      * Display a listing of the resource.
@@ -25,51 +24,7 @@ class AdminController extends Controller
     public function showAllUsers()
     {
         $users = User::all();
-        $title = 'Listado de usuarios';
-
-        return view('users.index', compact('users', 'title'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  User $user which is an id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('users.show', compact('user'));
-    }
-
-    public function edit(User $user)
-    {
-        return view('users.edit', compact('user'));
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(User $user)
-    {
-        $data = request()->validate([
-            'name' => ['bail','required','alpha','between:2,100'],
-            'surname' => ['bail','required','alpha','between:2,100'],
-            'id_card' => ['bail','required','numeric','digits_between:1,8',Rule::unique('users')->ignore($user->id)],
-            'email' => ['bail','required','email',Rule::unique('users')->ignore($user->id)],
-            'password' => ['bail','nullable','alpha_dash','between:6,16'],
-            'phone_number' => ['bail','required','digits:11'],
-            'address' => ['bail','required','between:5,200'],
-        ]);
-        if ($data['password'] != null) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
-        }
-        $user->update($data);
-        return redirect(route('admin.users.id.show', $user));
+        return view('users.list', compact('users'));
     }
     /**
      * Remove the specified resource from storage.
@@ -82,12 +37,10 @@ class AdminController extends Controller
         $user->delete();
         return redirect(route('admin.users'));
     }
-
     public function new()
     {
         return view('users.new');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -97,13 +50,13 @@ class AdminController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'name' => ['bail','required','alpha','between:2,100'],
-            'surname' => ['bail','required','alpha','between:2,100'],
-            'id_card' => ['bail','required','numeric','digits_between:1,8',Rule::unique('users')],
-            'email' => ['bail','required','email',Rule::unique('users')],
-            'password' => ['bail','required','alpha_dash','between:6,16'],
-            'phone_number' => ['bail','required','digits:11'],
-            'address' => ['bail','required','between:5,200']
+            'name' => ['bail', 'required', 'alpha', 'between:2,100'],
+            'surname' => ['bail', 'required', 'alpha', 'between:2,100'],
+            'id_card' => ['bail', 'required', 'numeric', 'digits_between:1,8', Rule::unique('users')],
+            'email' => ['bail', 'required', 'email', Rule::unique('users')],
+            'password' => ['bail', 'required', 'alpha_dash', 'between:6,16'],
+            'phone_number' => ['bail', 'required', 'digits:11'],
+            'address' => ['bail', 'required', 'between:5,200']
         ]);
 
         User::create([

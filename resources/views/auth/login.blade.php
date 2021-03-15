@@ -32,17 +32,6 @@
                 <input class="form-control" type="password" placeholder="Entre 6 y 16 caracteres" id="password"
                     name="password" required><br>
             </div>
-
-            <div class="mb-1">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                        {{ old('remember') ? 'checked' : '' }}>
-
-                    <label class="form-check-label" for="remember">
-                        Recuérdame
-                    </label>
-                </div>
-            </div>
             <button type="submit" class="btn btn-primary">Iniciar sesión</button>
     </fieldset>
 </form>

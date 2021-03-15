@@ -1,10 +1,10 @@
 @extends('layout')
 
-@section('title', $title)
+@section('title', 'Listado de usuarios')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-end mb-3">
-    <h1>{{ $title }}</h1>
+    <h1>{{ 'Listado de usuarios' }}</h1>
     <p>
         <a href="{{ route('admin.users.new') }}" class="btn btn-primary">Agregar un nuevo usuario</a>
     </p>
