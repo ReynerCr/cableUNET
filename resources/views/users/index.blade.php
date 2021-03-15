@@ -3,27 +3,47 @@
 @section('title', $title)
 
 @section('content')
-<h1>{{ $title }}</h1>
-<hr>
+<div class="d-flex justify-content-between align-items-end mb-3">
+    <h1>{{ $title }}</h1>
+    <p>
+        <a href="{{ route('users.new') }}" class="btn btn-primary">Agregar un nuevo usuario</a>
+    </p>
+</div>
 
-<p>
-    <a href="{{ route('users.new') }}">Agregar un nuevo usuario</a>
-</p>
+@if ($users->isEmpty())
+<p>No hay usuarios registrados.</p>
+@else
+<table class="table table-stripped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Correo electrónico</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+        <tr>
 
-<ul>
-    @forelse ($users as $user)
-    <li>
-        {{ $user->id }}: {{ $user->name }} {{ $user->surname }}, {{ $user->email }}
-        <a href="{{ route('users.show', $user) }}">Ver detalles</a>
-        <a href="{{ route('users.edit', $user) }}">Editar</a>
-        <form action="{{ route('users.destroy', $user) }}" method="POST">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button type="submit">Eliminar</button>
-        </form>
-    </li>
-    @empty
-    <li>No hay usuarios registrados.</li>
-    @endforelse
-</ul>
+            <th scope="row">{{ $user->id }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->surname }}</td>
+            <td>{{ $user->email }}</td>
+            <td>
+                <form action="{{ route('users.destroy', $user) }}" method="POST">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+                    <a href="{{ route('users.show', $user) }}" class="btn btn-outline-primary">Ver detalles</a>
+                    <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary">Editar</a>
+                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
+
 @endsection

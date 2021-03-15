@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Editar usuario')
+@section('title', 'Crear nuevo usuario')
 
 @section('content')
 
@@ -15,78 +15,48 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('users.show', $user) }}">
-    {{ method_field('PUT') }}
+<form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
     <fieldset>
         <legend>
-            <h1>Editar usuario:</h1>
+            <h1>Crear nuevo usuario:</h1>
         </legend>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="name">Nombres: </label>
             <input class="form-control" type="text" placeholder="Juan Pedro" maxlength="100" id="name" name="name"
-                required value={{ old('name', $user->name) }}><br>
+                required value={{ old('name') }}><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="surname">Apellidos: </label>
             <input class="form-control" type="text" placeholder="Perez Toledo" maxlength="100" id="surname"
-                name="surname" required value={{ old('surname', $user->surname) }}><br>
+                name="surname" required value={{ old('surname') }}><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="id_card">Cédula de identidad: </label>
             <input class="form-control" type="number" placeholder="V.-12345678" maxlength="9" id="id_card"
-                name="id_card" required value={{ old('id_card', $user->id_card) }}><br>
+                name="id_card" required value={{ old('id_card') }}><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="email">Correo electrónico: </label>
             <input class="form-control" type="email" placeholder="prueba@ejemplo.com" maxlength="50" id="email"
-                name="email" required value={{ old('email', $user->email) }}><br>
+                name="email" required value={{ old('email') }}><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
-            <label class="form-label" for="password">Contraseña: </label>
+            <label for="password">Contraseña: </label>
             <input class="form-control" type="password" placeholder="Entre 6 y 16 caracteres" id="password"
-                name="password"><br>
+                name="password" required><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="phone_number">Teléfono: </label>
             <input class="form-control" type="tel" placeholder="1234-567-8910" id="phone_number" name="phone_number"
-                required value={{ old('phone_number', $user->phone_number) }}><br>
+                required value={{ old('phone_number') }}><br>
         </div>
-<<<<<<< HEAD
-        <div class="mb-3">
-=======
         <div class="mb-1">
->>>>>>> laravelui
             <label class="form-label" for="address">Dirección </label>
             <textarea class="form-control" rows="4" cols="50" placeholder="Ingrese aquí su dirección." id="address"
-                name="address" required>{{ old('address', $user->address) }}</textarea><br>
+                name="address" required>{{ old('address') }}</textarea><br>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar usuario</button>
-        <a href="{{ route('users.index') }}" class="btn btn-link">Regresar al listado de usuarios</a>
+        <button type="submit" class="btn btn-primary">Crear usuario</button>
     </fieldset>
 </form>
 @endsection

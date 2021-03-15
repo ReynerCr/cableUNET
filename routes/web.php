@@ -1,8 +1,15 @@
 <?php
 
 use App\Http\Controllers\UserController;
+<<<<<<< HEAD
 use App\Http\Controllers\WelcomeUserController;
 use Illuminate\Support\Facades\Route;
+=======
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+>>>>>>> laravelui
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('home');
 });
+=======
+Route::get('/', [HomeController::class, 'index']);
+>>>>>>> laravelui
 
 Route::get('/usuarios', [UserController::class, 'index'])
     ->name('users.index');
@@ -43,3 +54,16 @@ Route::post('/usuarios/registrar', [UserController::class, 'store'])
 Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])
     ->where('user', '[0-9]+')
     ->name('users.destroy');
+<<<<<<< HEAD
+=======
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home');
+
+Route::get('/administrador', [AdminController::class, 'home'])
+    ->name('admin.home');
+Route::get('/usuario', [UserController::class, 'home'])
+    ->name('user.home');
+>>>>>>> laravelui
