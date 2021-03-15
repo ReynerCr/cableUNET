@@ -8,6 +8,18 @@ use \App\Models\User;
 
 class UserController extends Controller
 {
+<<<<<<< HEAD
+=======
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isuser');
+    }
+    public function home()
+    {
+        return view('user');
+    }
+>>>>>>> laravelui
     /**
      * Display a listing of the resource.
      *
@@ -46,6 +58,7 @@ class UserController extends Controller
     public function store()
     {
         $data = request()->validate([
+<<<<<<< HEAD
             'name' => [
                 'bail',
                 'required',
@@ -87,6 +100,15 @@ class UserController extends Controller
                 'required',
                 'between:5,200',
             ]
+=======
+            'name' => ['bail','required','alpha','between:2,100'],
+            'surname' => ['bail','required','alpha','between:2,100'],
+            'id_card' => ['bail','required','numeric','digits_between:1,8',Rule::unique('users')],
+            'email' => ['bail','required','email',Rule::unique('users')],
+            'password' => ['bail','required','alpha_dash','between:6,16'],
+            'phone_number' => ['bail','required','digits:11'],
+            'address' => ['bail','required','between:5,200']
+>>>>>>> laravelui
         ]);
 
         User::create([
@@ -116,6 +138,7 @@ class UserController extends Controller
     public function update(User $user)
     {
         $data = request()->validate([
+<<<<<<< HEAD
             'name' => [
                 'bail',
                 'required',
@@ -157,6 +180,15 @@ class UserController extends Controller
                 'required',
                 'between:5,200',
             ],
+=======
+            'name' => ['bail','required','alpha','between:2,100'],
+            'surname' => ['bail','required','alpha','between:2,100'],
+            'id_card' => ['bail','required','numeric','digits_between:1,8',Rule::unique('users')->ignore($user->id)],
+            'email' => ['bail','required','email',Rule::unique('users')->ignore($user->id)],
+            'password' => ['bail','nullable','alpha_dash','between:6,16'],
+            'phone_number' => ['bail','required','digits:11'],
+            'address' => ['bail','required','between:5,200'],
+>>>>>>> laravelui
         ]);
 
         if ($data['password'] != null) {
