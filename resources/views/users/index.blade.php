@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between align-items-end mb-3">
     <h1>{{ $title }}</h1>
     <p>
-        <a href="{{ route('users.new') }}" class="btn btn-primary">Agregar un nuevo usuario</a>
+        <a href="{{ route('admin.users.new') }}" class="btn btn-primary">Agregar un nuevo usuario</a>
     </p>
 </div>
 
@@ -32,11 +32,11 @@
             <td>{{ $user->surname }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                <form action="{{ route('users.destroy', $user) }}" method="POST">
+                <form action="{{ route('admin.users.id.destroy', $user) }}" method="POST">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
-                    <a href="{{ route('users.show', $user) }}" class="btn btn-outline-primary">Ver detalles</a>
-                    <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary">Editar</a>
+                    <a href="{{ route('admin.users.id.show', $user) }}" class="btn btn-outline-primary">Ver detalles</a>
+                    <a href="{{ route('admin.users.id.edit', $user) }}" class="btn btn-outline-primary">Editar</a>
                     <button type="submit" class="btn btn-outline-danger">Eliminar</button>
                 </form>
             </td>

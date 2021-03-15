@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 @guest
-                <!-- Links de autentificación -->
+                <!-- Guest links -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
                 </li>
@@ -17,8 +17,14 @@
                     <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                 </li>
                 @else
-                <!-- Links para usuarios autenticados -->
+                <!-- Links for auth users -->
                 <li class="nav-item"><a href="/home" class="nav-link">Inicio</a></li>
+
+                <li class="nav-item"><a href="{{ route('admin.users') }}" class="nav-link">Lista</a></li>
+                <li class="nav-item"><a href="{{ route('admin.users.id.show', 3) }}" class="nav-link">show user</a></li>
+                <li class="nav-item"><a href="{{ route('admin.users.id.show', 4) }}" class="nav-link">show admin </a></li>
+                <li class="nav-item"><a href="{{ route('admin.users.id.edit', 3) }}" class="nav-link">edit user</a></li>
+                <li class="nav-item"><a href="{{ route('admin.users.id.edit', 4) }}" class="nav-link">edit admin</a></li>
 
                 <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -26,6 +32,7 @@
                         <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
                     </form>
                 </li>
+                <!-- TODO LISTA TEMPORAL -->
                 @endguest
             </ul>
         </div>

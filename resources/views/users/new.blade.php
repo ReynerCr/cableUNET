@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('users.create') }}">
+<form method="POST" action="{{ route('admin.users.create') }}">
     {{ csrf_field() }}
     <fieldset>
         <legend>
@@ -57,7 +57,7 @@
                 name="address" required>{{ old('address') }}</textarea><br>
         </div>
         <button type="submit" class="btn btn-primary">Crear usuario</button>
-        <a href="{{ route('users.index') }}" class="btn btn-link">Regresar al listado de usuarios</a>
+        <a href="{{ route('admin.users') }}" class="btn btn-link">Regresar al listado de usuarios</a>
     </fieldset>
 </form>
 @endsection

@@ -17,12 +17,36 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return redirect(route('home'));
+});
 
-Route::get('/usuarios', [UserController::class, 'index'])
-    ->name('users.index');
+Route::prefix('/administrador')->name('admin')->group(function () {
+    Route::get('', [AdminController::class, 'home']);
 
-Route::get('/usuarios/{user}', [UserController::class, 'show'])
+    Route::prefix('usuarios')->name('.users')->group(function () {
+        // /administrador/usuarios as admin.users
+        Route::get('', [AdminController::class, 'showAllUsers']);
+        Route::get('nuevo', [AdminController::class, 'new'])
+            ->name('.new');
+        Route::post('registrar', [AdminController::class, 'store'])
+            ->name('.create');
+
+        Route::prefix('{user}')->where(['[0-9]+'])->name('.id')->group(function () {
+            // /administrador/usuarios/{user} as admin.users.id
+            Route::get('', [AdminController::class, 'show'])
+                ->name('.show');
+            Route::put('', [AdminController::class, 'update'])
+                ->name('.update');
+            Route::delete('', [AdminController::class, 'destroy'])
+                ->name('.destroy');
+            Route::get('editar', [AdminController::class, 'edit'])
+                ->name('.edit');
+        });
+    });
+});
+
+/* Route::get('/usuarios/{user}', [UserController::class, 'show'])
     ->where('user', '[0-9]+')
     ->name('users.show');
 
@@ -32,17 +56,9 @@ Route::put('/usuarios/{user}', [UserController::class, 'update'])
 
 Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])
     ->where('user', '[0-9]+')
-    ->name('users.edit');
+    ->name('users.edit'); */
 
-Route::get('/usuarios/nuevo', [UserController::class, 'new'])
-    ->name('users.new');
 
-Route::post('/usuarios/registrar', [UserController::class, 'store'])
-    ->name('users.create');
-
-Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])
-    ->where('user', '[0-9]+')
-    ->name('users.destroy');
 
 Auth::routes();
 

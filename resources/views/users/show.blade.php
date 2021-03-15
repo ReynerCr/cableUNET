@@ -15,8 +15,8 @@
             @if ($user->isAdmin())
                 <p>Es administrador</p>
             @endif
-            <a href="{{ route('users.index') }}" class="card-link">Regresar al listado de usuarios</a>
-            <a href="{{ route('users.edit', $user) }}" class="card-link">Editar</a>
+            <a href="{{ route('admin.users') }}" class="card-link">Regresar al listado de usuarios</a>
+            <a href="{{ route('admin.users.id.edit', $user) }}" class="card-link">Editar</a>
         </div>
     </div>
 @endsection
