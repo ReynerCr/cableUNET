@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,20 +15,15 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin', ['only' => 'indexAdmin']);
     }
 
     /**
-     * Show the application dashboard.
+     * Redirects to the role home page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function indexAdmin()
+    public function index()
     {
-        return view('home');
-    }
-    public function indexUser()
-    {
-        return view('user');
+        return redirect(Auth::user()->is_admin ? route('admin.home'):route('user.home'));
     }
 }

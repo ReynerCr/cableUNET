@@ -11,11 +11,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin:false');
+        $this->middleware('isuser');
     }
     public function home()
     {
-        return view('user.home');
+        return view('user');
     }
     /**
      * Display a listing of the resource.

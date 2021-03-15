@@ -9,11 +9,11 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin:true');
+        $this->middleware('isadmin');
     }
 
     public function home()
     {
-        return view('admin.home');
+        return view('admin');
     }
 }

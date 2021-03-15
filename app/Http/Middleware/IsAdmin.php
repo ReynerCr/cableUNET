@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckRole
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -23,10 +23,5 @@ class CheckRole
         else {
             return redirect(route('user.home'));
         }
-        /* if (! $request->user()->isAdmin()) {
-            return redirect(route('user.home'));
-            //abort(401, 'Esta acción no está autorizada.');
-        }
-        return $next($request); */
     }
 }

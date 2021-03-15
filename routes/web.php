@@ -17,9 +17,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/usuarios', [UserController::class, 'index'])
     ->name('users.index');
@@ -48,12 +46,10 @@ Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])
 
 Auth::routes();
 
-/* Route::get('/admin', [AdminController::class, 'home'])
-    ->name('admin.home');
-Route::get('/user', [UserController::class, 'home'])
-    ->name('user.home'); */
-
-Route::get('/home', [HomeController::class, 'indexAdmin'])
+Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
-Route::get('/user', [HomeController::class, 'indexUser'])
+
+Route::get('/administrador', [AdminController::class, 'home'])
+    ->name('admin.home');
+Route::get('/usuario', [UserController::class, 'home'])
     ->name('user.home');
