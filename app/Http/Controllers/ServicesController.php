@@ -26,8 +26,8 @@ class ServicesController extends Controller
     {
         // cable tv
         if ($type == 3) {
-
             $channels = TvChannel::all();
+
             if ($channels->isEmpty()) {
                 return redirect(route('admin.home'))->withErrors(['No se puede crear un servicio de televisión por cable sin haber registrado canales.']);
             }

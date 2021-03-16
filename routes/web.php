@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ChannelsController;
+use App\Http\Controllers\PackagesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -61,11 +62,22 @@ Route::prefix('/administrador')->name('admin')->group(function () {
                 ->name('.show');
         });
         Route::prefix('canal')->name('.channel')->group(function () {
+            // /administrador/servicios/canal as admin.services.channel
             Route::get('', [ChannelsController::class, 'create'])
                 ->name('.create');
             Route::post('registrar', [ChannelsController::class, 'store'])
                 ->name('.store');
         });
+    });
+    Route::prefix('paquetes')->name('.packages')->group(function () {
+        // /administrador/paquetes as admin.packages
+        Route::get('crear', [PackagesController::class, 'create'])
+            ->name('.create');
+        Route::post('registrar', [PackagesController::class, 'store'])
+            ->name('.store');
+        Route::get('{package}', [PackagesController::class, 'show'])
+            ->where(['package' => '[0-9]+'])
+            ->name('.show');
     });
 
 

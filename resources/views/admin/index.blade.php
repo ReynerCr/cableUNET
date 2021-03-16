@@ -20,7 +20,7 @@
         <ul>
             <li>
                 <div>
-                    <h5>Creación un servicio:</h5>
+                    <h5 class="card-subtitle">Creación un servicio:</h5>
                     <ul>
                         <li><a href="{{ route('admin.services.type.create', 1) }}" class="btn btn-link">Internet</a>
                         </li>
@@ -31,13 +31,13 @@
                         <ul>
                 </div>
             </li>
-            <li><a href="">Crear un paquete de servicios</a></li>
-            <li><a href="{{ route('admin.services.channel.create') }}">Añadir canales de televisión a la lista de
+            <li><a class="btn btn-link" href="{{ route('admin.packages.create') }}">Crear un paquete de servicios</a></li>
+            <li><a class="btn btn-link" href="{{ route('admin.services.channel.create') }}">Añadir canales de televisión a la lista de
                     canales</a></li>
-            <li><a href="">Modificar programación por canal</a></li>
-            <li><a href="">Emitir facturas en el sistema</a></li>
-            <li><a href="">Revisión de solicitudes de cambio de plan</a></li>
-            <li>Administración de <a href="{{ route('admin.users') }}">usuarios</a> o <a
+            <li><a class="btn btn-link" href="">Modificar programación por canal</a></li>
+            <li><a class="btn btn-link" href="">Emitir facturas en el sistema</a></li>
+            <li><a class="btn btn-link" href="">Revisión de solicitudes de cambio de plan</a></li>
+            <li>Administración de <a class="btn btn-link" href="{{ route('admin.users') }}">usuarios</a> o <a class="btn btn-link"
                     href="{{ route('admin.users') }}">administradores</a></li>
         </ul>
     </div>
