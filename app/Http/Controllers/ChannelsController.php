@@ -37,7 +37,7 @@ class ChannelsController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'name' => ['bail', 'required', 'alpha', 'between:1,30', Rule::unique('tv_channels')],
+            'name' => ['bail', 'required', 'between:1,30', Rule::unique('tv_channels')],
             'description' => ['bail', 'required', 'between:4,150']
         ]);
 

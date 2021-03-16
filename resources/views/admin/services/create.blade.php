@@ -3,6 +3,7 @@
 @section('title', 'Creación de servicio')
 
 @section('content')
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <p>Se han detectado los siguientes errores:</p>
@@ -13,6 +14,10 @@
     </ul>
 </div>
 @endif
+
+<noscript class="alert alert-danger">
+    <p>Se requiere JavaScript para poder cargar canales al crear servicio de tv por cable.</p>
+</noscript>
 
 <form method="POST" action="{{ route('admin.services.type.store', $type) }}">
     {{ csrf_field() }}
@@ -35,8 +40,8 @@
         </legend>
         <div class="mb-1">
             <label class="form-label" for="name">Nombre del plan: </label>
-            <input class="form-control" type="text" placeholder="ilimitado" maxlength="30" id="name" name="name" required
-                value={{ old('name') }}><br>
+            <input class="form-control" type="text" placeholder="ilimitado" maxlength="30" id="name" name="name"
+                required value={{ old('name') }}><br>
         </div>
 
         @switch($type)
@@ -67,7 +72,18 @@
             <label class="form-label" for="minutes">Minutos: </label>
             <input class="form-control" min="1" type="number" placeholder="100" id="minutes" name="minutes" required
                 value={{ old('minutes') }}><br>
+            {{-- Generating channel list  --}}
+            <ul id="channel_list">
+                <select id="select_channel">
+                    @foreach ($channels as $channel)
+                    <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                    @endforeach
+                </select>
+                <button id="add_channel" type="button" class="btn btn-secondary">Agregar</button>
+            </ul>
         </div>
+        <!-- Add the script for functionality -->
+        <script type="application/javascript" src="/addchannels.js"></script>
         @break
         @endswitch
 
@@ -80,4 +96,5 @@
         <a href="{{ route('admin.home') }}" class="btn btn-link">Regresar al panel de administración</a>
     </fieldset>
 </form>
+
 @endsection

@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use \App\Models\Services;
-use App\Models\Services\Service;
 use App\Models\Services\InternetService;
 use App\Models\Services\TelephonyService;
 use App\Models\Services\CableTvService;
+use App\Models\Services\Tv\TvChannel;
 
 class ServicesController extends Controller
 {
@@ -19,6 +18,15 @@ class ServicesController extends Controller
      */
     public function create($type)
     {
+        // cable tv
+        if ($type == 3) {
+
+            $channels = TvChannel::all();
+            if ($channels->isEmpty()) {
+                return redirect(route('admin.home'))->withErrors(['No se puede crear un servicio de televisión por cable sin haber registrado canales.']);
+            }
+            return view('admin.services.create', compact('type', 'channels'));
+        }
         return view('admin.services.create', compact('type'));
     }
 
@@ -34,7 +42,7 @@ class ServicesController extends Controller
             return redirect(route('admin.users'));
         }
         $rules = [
-            'name' => ['bail', 'required', 'alpha', 'between:2,30'],
+            'name' => ['bail', 'required', 'between:2,30'],
             'price' => ['bail', 'required', 'numeric', 'min:1'],
         ];
         switch ($type) {
