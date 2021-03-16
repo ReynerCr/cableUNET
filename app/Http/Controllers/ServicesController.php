@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Services\InternetService;
 use App\Models\Services\TelephonyService;
 use App\Models\Services\CableTvService;
 use App\Models\Services\Tv\TvChannel;
+use App\Models\Services\Tv\TvPlan;
 
 class ServicesController extends Controller
 {
@@ -57,10 +57,16 @@ class ServicesController extends Controller
                 break;
                 $rules['name'][] = Rule::unique('cable_tv_services');
             case 3: // cable tv
+                $i = 1;
+                $rules['ch0'] = ['bail', 'required', 'numeric', 'integer'];
+                while (request()->has('ch' . $i)) {
+                    $rules['ch' . $i] = ['bail', 'numeric', 'integer'];
+                    ++$i;
+                }
                 break;
         }
-
         $data = request()->validate($rules);
+
         switch ($type) {
             case 1:
                 $service = InternetService::create([
@@ -78,11 +84,28 @@ class ServicesController extends Controller
                 ]);
                 break;
             case 3:
+                // checking for duplicated channels in $data
+                $i = 0;
+                unset($rules); // reusing variable
+                $rules = array();
+                while (!empty($data['ch' . $i])) {
+                    $rules[] = $data['ch' . $i];
+                    ++$i;
+                }
+                // remove duplicates
+                $rules = array_unique($rules);
+
+                // record the data
                 $service = CableTvService::create([
                     'name' => $data['name'],
-                    //TODO channels list
                     'price' => $data['price']
                 ]);
+                foreach ($rules as $channel) {
+                    TvPlan::create([
+                        'cable_tv_service_id' => $service->id,
+                        'tv_channel_id' => $channel,
+                    ]);
+                }
                 break;
         }
         return redirect()->route('admin.services.type.show', [$type, $service->id]);
