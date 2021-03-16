@@ -31,7 +31,17 @@
         @break
 
         @case(3) {{-- cable TV --}}
-        <p></p>
+        <ul>
+            {{-- Channel lists --}}
+            <div class="mb-3">
+                <p>Lista de canales:</p>
+                <ul>
+                    @foreach ($service->channels as $channel)
+                    <li>{{ $channel->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </ul>
         @break
 
         @endswitch

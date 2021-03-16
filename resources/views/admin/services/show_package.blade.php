@@ -36,9 +36,15 @@
             <ul>
                 <li>Nombre del plan: {{ $package->cable_tv_service->name }}</li>
                 <li>Precio individual: {{ $package->cable_tv_service->price }}</li>
-                <ul>
-                    {{-- Lista de canales --}}
-                </ul>
+                {{-- Channel lists --}}
+                <div class="mb-3">
+                    <p>Lista de canales:</p>
+                    <ul>
+                        @foreach ($package->cable_tv_service->channels as $channel)
+                        <li>{{ $channel->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </ul>
         </section>
         @endisset

@@ -69,9 +69,6 @@
         </noscript>
 
         <div class="mb-1">
-            <label class="form-label" for="minutes">Minutos: </label>
-            <input class="form-control" min="1" type="number" placeholder="100" id="minutes" name="minutes" required
-                value={{ old('minutes') }}><br>
             {{-- Generating channel list  --}}
             <div class="d-flex">
                 <select class="form-select" id="select_channel">
