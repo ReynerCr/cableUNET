@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Validation\Rule;
-use \App\Models\User;
-
 class ClientController extends UserController
 {
     public function __construct()

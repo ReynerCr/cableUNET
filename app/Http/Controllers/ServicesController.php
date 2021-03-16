@@ -11,6 +11,12 @@ use App\Models\Services\Tv\TvPlan;
 
 class ServicesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isadmin');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

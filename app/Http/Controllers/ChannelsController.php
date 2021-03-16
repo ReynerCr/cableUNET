@@ -8,6 +8,12 @@ use \App\Models\Services\Tv\TvChannel;
 
 class ChannelsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isadmin');
+    }
+
     /**
      * Display a listing of the resource.
      *
