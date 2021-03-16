@@ -12,7 +12,13 @@ class AdminController extends UserController
         parent::__construct(); // auth
         $this->middleware('isadmin');
     }
-    public function home()
+
+    /**
+     * Shows the home page for clients
+     *
+     *  @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         return view('admin.index');
     }
@@ -37,7 +43,7 @@ class AdminController extends UserController
         $user->delete();
         return redirect(route('admin.users'));
     }
-    public function new()
+    public function create()
     {
         return view('users.new');
     }
@@ -52,10 +58,10 @@ class AdminController extends UserController
         $data = request()->validate([
             'name' => ['bail', 'required', 'alpha', 'between:2,100'],
             'surname' => ['bail', 'required', 'alpha', 'between:2,100'],
-            'id_card' => ['bail', 'required', 'numeric', 'digits_between:1,8', Rule::unique('users')],
+            'id_card' => ['bail', 'required', 'numeric', 'integer', 'digits_between:1,8', Rule::unique('users')],
             'email' => ['bail', 'required', 'email', Rule::unique('users')],
             'password' => ['bail', 'required', 'alpha_dash', 'between:6,16'],
-            'phone_number' => ['bail', 'required', 'digits:11'],
+            'phone_number' => ['bail', 'required', 'numeric', 'digits:11'],
             'address' => ['bail', 'required', 'between:5,200']
         ]);
 

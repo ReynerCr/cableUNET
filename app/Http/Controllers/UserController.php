@@ -40,10 +40,10 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => ['bail', 'required', 'alpha', 'between:2,100'],
             'surname' => ['bail', 'required', 'alpha', 'between:2,100'],
-            'id_card' => ['bail', 'required', 'numeric', 'digits_between:1,8', Rule::unique('users')->ignore($user->id)],
+            'id_card' => ['bail', 'required', 'numeric', 'integer', 'digits_between:1,8', Rule::unique('users')->ignore($user->id)],
             'email' => ['bail', 'required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['bail', 'nullable', 'alpha_dash', 'between:6,16'],
-            'phone_number' => ['bail', 'required', 'digits:11'],
+            'phone_number' => ['bail', 'required', 'numeric', 'digits:11'],
             'address' => ['bail', 'required', 'between:5,200'],
         ]);
         if ($data['password'] != null) {

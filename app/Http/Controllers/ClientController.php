@@ -13,17 +13,13 @@ class ClientController extends UserController
         $this->middleware('isuser');
         $this->middleware('usercansee', ['only' => ['show', 'edit', 'update']]);
     }
-    public function home()
-    {
-        return view('client.index');
-    }
     /**
-     * Display a listing of the resource.
+     * Shows the home page for clients.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return $this->home();
+        return view('client.index');
     }
 }

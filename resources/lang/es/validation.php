@@ -153,6 +153,9 @@ return [
     'attributes' => [
         'id_card' => 'cédula',
         'phone_number' => 'teléfono',
+        'download_speed' => 'velocidad de descarga',
+        'upload_speed' => 'velocidad de subida',
+        'minutes' => 'minutos',
         'address'               => 'dirección',
         'age'                   => 'edad',
         'body'                  => 'cuerpo',
