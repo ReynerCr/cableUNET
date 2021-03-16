@@ -19,7 +19,7 @@
                 </div>
             </li>
             <li><a href="">Crear un paquete de servicios</a></li>
-            <li><a href="">Añadir canales de televisión a la lista de canales disponibles</a></li>
+            <li><a href="{{ route('admin.services.channel.create') }}">Añadir canales de televisión a la lista de canales</a></li>
             <li><a href="">Modificar programación por canal</a></li>
             <li><a href="">Emitir facturas en el sistema</a></li>
             <li><a href="">Revisión de solicitues de cambio de plan</a></li>

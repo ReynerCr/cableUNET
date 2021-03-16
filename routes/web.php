@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ChannelsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -58,6 +59,12 @@ Route::prefix('/administrador')->name('admin')->group(function () {
             Route::get('{id}', [ServicesController::class, 'show'])
                 ->where(['id' => '[0-9]+'])
                 ->name('.show');
+        });
+        Route::prefix('canal')->name('.channel')->group(function () {
+            Route::get('', [ChannelsController::class, 'create'])
+                ->name('.create');
+            Route::post('registrar', [ChannelsController::class, 'store'])
+                ->name('.store');
         });
     });
 

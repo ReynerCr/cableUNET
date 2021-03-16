@@ -39,12 +39,15 @@ class ServicesController extends Controller
         ];
         switch ($type) {
             case 1: // internet
+                $rules['name'][] = Rule::unique('internet_services');
                 $rules['download_speed'] = ['bail', 'required', 'numeric', 'min:0.1'];
                 $rules['upload_speed'] = ['bail', 'required', 'numeric', 'min:0.1'];
                 break;
             case 2: // telephony
+                $rules['name'][] = Rule::unique('telephony_services');
                 $rules['minutes'] = ['bail', 'required', 'numeric', 'integer', 'min:1'];
                 break;
+                $rules['name'][] = Rule::unique('cable_tv_services');
             case 3: // cable tv
                 break;
         }
