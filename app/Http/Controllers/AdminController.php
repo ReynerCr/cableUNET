@@ -67,8 +67,8 @@ class AdminController extends UserController
     public function store()
     {
         $data = request()->validate([
-            'name' => ['bail', 'required', 'alpha', 'between:2,100'],
-            'surname' => ['bail', 'required', 'alpha', 'between:2,100'],
+            'name' => ['bail', 'required', 'between:2,100'],
+            'surname' => ['bail', 'required', 'between:2,100'],
             'id_card' => ['bail', 'required', 'numeric', 'integer', 'digits_between:1,8', Rule::unique('users')],
             'email' => ['bail', 'required', 'email', Rule::unique('users')],
             'password' => ['bail', 'required', 'alpha_dash', 'between:6,16'],

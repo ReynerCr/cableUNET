@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'tv_plans',
             'programme_schedules',
             'service_packages',
-            'suscriptions',
+            'subscriptions',
             'package_change_requests',
             'invoices',
         ];
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
         }
         $max = 15;
         for ($i = 0; $i < $max; $i++) {
-            \App\Models\Suscription::factory()->create();
+            \App\Models\Subscription::factory()->create();
         }
         $max = 5;
         for ($i = 0; $i < $max; $i++) {
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
     {
         $tableArray[] = 'invoices';
         $tableArray[] = 'package_change_requests';
-        $tableArray[] = 'suscriptions';
+        $tableArray[] = 'subscriptions';
     }
 
     protected function addTvService(&$tableArray)

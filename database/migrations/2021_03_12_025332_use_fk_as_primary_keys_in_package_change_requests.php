@@ -15,7 +15,7 @@ class UseFkAsPrimaryKeysInPackageChangeRequests extends Migration
     {
         Schema::table('package_change_requests', function (Blueprint $table) {
             $table->dropColumn('id');
-            $table->primary(['suscription_id', 'new_sp_id']);
+            $table->primary(['subscription_id', 'new_sp_id']);
         });
     }
 
@@ -28,7 +28,7 @@ class UseFkAsPrimaryKeysInPackageChangeRequests extends Migration
     {
         Schema::table('package_change_requests', function (Blueprint $table) {
             $table->id()->first();
-            $table->dropPrimary(['suscription_id', 'new_sp_id']);
+            $table->dropPrimary(['subscription_id', 'new_sp_id']);
         });
     }
 }

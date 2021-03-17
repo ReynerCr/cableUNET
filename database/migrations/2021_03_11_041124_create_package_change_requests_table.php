@@ -15,10 +15,10 @@ class CreatePackageChangeRequestsTable extends Migration
     {
         Schema::create('package_change_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('suscription_id');
-            $table->foreign('suscription_id')
+            $table->unsignedBigInteger('subscription_id');
+            $table->foreign('subscription_id')
                 ->references('id')
-                ->on('suscriptions')
+                ->on('subscriptions')
                 ->cascadeOnDelete();
 
             $table->unsignedBigInteger('new_sp_id');

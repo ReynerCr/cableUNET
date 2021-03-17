@@ -18,7 +18,7 @@
     <ul>
         <li>Nombre del plan: {{ $package->telephony_service->name }}</li>
         <li>Minutos: {{ $package->telephony_service->minutes }}</li>
-        <li>Precio individual: {{ $package->internet_service->price }}</li>
+        <li>Precio individual: {{ $package->telephony_service->price }}</li>
     </ul>
 </section>
 @endisset

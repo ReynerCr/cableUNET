@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ServicePackage;
-use App\Models\Suscription;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -13,7 +13,8 @@ class ClientController extends UserController
     {
         parent::__construct(); //auth
         $this->middleware('isuser');
-        $this->middleware('usercansee', ['only' => ['show', 'edit', 'update']]);
+        $this->middleware('usercansee:user', ['only' => ['show', 'edit', 'update']]);
+        $this->middleware('usercansee:subscription', ['only' => ['showSubscription',]]);
     }
     /**
      * Shows the home page for clients.
@@ -59,19 +60,19 @@ class ClientController extends UserController
         $data = request()->validate([
             'service_package_id' => ['bail', 'numeric', 'integer', 'exists:service_packages,id']
         ]);
-        $subscription = new Suscription;
-        $userid = Auth::user()->id;
-        $subscription->user_id = $userid;
+        $subscription = new Subscription;
+        $user = Auth::user()->id;
+        $subscription->user_id = $user;
         $subscription->service_package_id = $data['service_package_id'];
         $subscription->save();
-        return redirect()->route('client.id.sub',  compact('userid', 'subscription'));
+        return redirect()->route('client.id.sub',  compact('user', 'subscription'));
     }
 
-    public function showSubscription(User $user, Suscription $suscription)
+    public function showSubscription(User $user, Subscription $subscription)
     {
-        $package = $suscription->package;
+        $package = $subscription->package;
         if (!isset($package)) // if subscription doesn't exist
             return redirect()->route('client.home');
-        return view('client.show_subscription', compact('suscription', 'package', 'user'));
+        return view('client.show_subscription', compact('subscription', 'package', 'user'));
     }
 }

@@ -15,11 +15,11 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('suscription_id')->unique();
+            $table->unsignedBigInteger('subscription_id')->unique();
 
-            $table->foreign('suscription_id')
+            $table->foreign('subscription_id')
                 ->references('id')
-                ->on('suscriptions');
+                ->on('subscriptions');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('modified_at')->useCurrent();

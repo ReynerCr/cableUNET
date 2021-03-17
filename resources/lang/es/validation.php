@@ -149,7 +149,6 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-    /* TODO editar para que tenga los atributos de formularios */
     'attributes' => [
         'id_card' => 'cédula',
         'phone_number' => 'teléfono',

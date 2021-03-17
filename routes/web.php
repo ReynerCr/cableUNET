@@ -55,7 +55,7 @@ Route::prefix('/cliente')->name('client')->group(function () {
             ->name('.update');
         Route::get('editar', [ClientController::class, 'edit'])
             ->name('.edit');
-        Route::get('{suscription}', [ClientController::class, 'showSubscription'])
+        Route::get('{subscription}', [ClientController::class, 'showSubscription'])
             ->name('.sub')
             ->where(['[0-9]+']);
     });

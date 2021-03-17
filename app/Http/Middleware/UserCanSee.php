@@ -15,9 +15,9 @@ class UserCanSee
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $param)
     {
-        $requestedId = $request->route('user');
+        $requestedId = $request->route($param);
         if(Auth::user()->id == $requestedId->id) {
             return $next($request);
         }

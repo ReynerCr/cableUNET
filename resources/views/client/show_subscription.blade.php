@@ -17,10 +17,9 @@
                 <li>Correo electrónico: {{ $user->email }}</li>
                 <li>Número de teléfono: {{ $user->phone_number }}</li>
             </ul>
-            <p>Fecha de compra: {{ $suscription->created_at }}</p>
+            <p>Fecha de compra: {{ $subscription->created_at }}</p>
         </section>
         <a href="{{ route('admin.home') }}" class="btn btn-link">Regresar al panel de administración</a>
-        <a href="{{ route('admin.packages.create') }}" class="btn btn-link">Crear nuevo paquete de servicios</a>
     </div>
 </div>
 @endsection

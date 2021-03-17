@@ -38,8 +38,8 @@ class UserController extends Controller
     public function update(User $user)
     {
         $data = request()->validate([
-            'name' => ['bail', 'required', 'alpha', 'between:2,100'],
-            'surname' => ['bail', 'required', 'alpha', 'between:2,100'],
+            'name' => ['bail', 'required', 'between:2,100'],
+            'surname' => ['bail', 'required', 'between:2,100'],
             'id_card' => ['bail', 'required', 'numeric', 'integer', 'digits_between:1,8', Rule::unique('users')->ignore($user->id)],
             'email' => ['bail', 'required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['bail', 'nullable', 'alpha_dash', 'between:6,16'],
