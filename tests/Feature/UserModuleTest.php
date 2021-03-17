@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+// THIS DOESN'T WORK NOW
 class UserModuleTest extends TestCase
 {
     // The tests needs to be executed with a clean DB, preferably a test DB.
