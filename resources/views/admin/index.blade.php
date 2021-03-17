@@ -36,11 +36,19 @@
             <li><a class="btn btn-link" href="{{ route('admin.services.channel.create') }}">Añadir canales de televisión
                     a la lista de
                     canales</a></li>
-            <li><a class="btn btn-link" href="">NO IMPLEMENTADO Modificar programación por canal</a></li>
-            <li><a class="btn btn-link" href="">Emitir facturas en el sistema</a></li>
-            <li><a class="btn btn-link" href="">Revisión de solicitudes de cambio de plan</a></li>
-            <li>Administración de <a class="btn btn-link" href="{{ route('admin.users') }}">usuarios</a> o <a
-                    class="btn btn-link" href="{{ route('admin.users') }}">administradores</a></li>
+
+            <div class="card">
+                <p>No implementado</p>
+                <li><a class="btn btn-link" href="">Modificar programación por canal</a></li>
+                <li><a class="btn btn-link" href="">Emitir facturas en el sistema</a></li>
+                <li><a class="btn btn-link" href="">Revisión de solicitudes de cambio de plan</a></li>
+            </div>
+            <li>
+                Administración de
+                <a class="btn btn-link" href="{{ route('admin.users').'?tipo=usuarios' }}">usuarios</a> o
+                <a class="btn btn-link" href="{{ route('admin.users').'?tipo=administradores' }}">administradores</a> o
+                <a class="btn btn-link" href="{{ route('admin.users') }}">mixtos</a>
+            </li>
         </ul>
     </div>
 </div>

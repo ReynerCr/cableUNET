@@ -29,6 +29,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Routes for clients
 Route::prefix('/cliente')->name('client')->group(function () {
     // /cliente as client
     Route::get('', [ClientController::class, 'index'])
@@ -60,11 +61,13 @@ Route::prefix('/cliente')->name('client')->group(function () {
     });
 });
 
+// Routes for admins
 Route::prefix('/administrador')->name('admin')->group(function () {
     // /administrador as admin
     Route::get('', [AdminController::class, 'index'])
         ->name('.home');
 
+    // Routes to add services or tv channels
     Route::prefix('servicios')->name('.services')->group(function () {
         // /administrador/servicios as admin.services
         Route::prefix('{type}')->where(['type' => '[1-3]'])->name('.type')->group(function () {
@@ -77,6 +80,8 @@ Route::prefix('/administrador')->name('admin')->group(function () {
                 ->where(['id' => '[0-9]+'])
                 ->name('.show');
         });
+
+        //Routes to add tv channels
         Route::prefix('canal')->name('.channel')->group(function () {
             // /administrador/servicios/canal as admin.services.channel
             Route::get('', [ChannelsController::class, 'create'])
@@ -85,6 +90,8 @@ Route::prefix('/administrador')->name('admin')->group(function () {
                 ->name('.store');
         });
     });
+
+    // Routes to add packages and show them
     Route::prefix('paquetes')->name('.packages')->group(function () {
         // /administrador/paquetes as admin.packages
         Route::get('crear', [PackagesController::class, 'create'])
@@ -96,7 +103,7 @@ Route::prefix('/administrador')->name('admin')->group(function () {
             ->name('.show');
     });
 
-
+    // User CRUD routes
     Route::prefix('usuarios')->name('.users')->group(function () {
         // /administrador/usuarios as admin.users
         Route::get('', [AdminController::class, 'showAllUsers']);

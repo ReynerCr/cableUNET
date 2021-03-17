@@ -29,7 +29,18 @@ class AdminController extends UserController
      */
     public function showAllUsers()
     {
-        $users = User::all();
+        // añadir condicion de if para admins y clients
+        $tipo = request()->get('tipo');
+        if (isset($tipo))
+        {
+            if ($tipo == 'administradores') {
+                $users = User::all()->where('is_admin', 1);
+            } else {
+                $users = User::all()->where('is_admin', 0);
+            }
+        } else {
+            $users = User::all();
+        }
         return view('users.list', compact('users'));
     }
     /**
