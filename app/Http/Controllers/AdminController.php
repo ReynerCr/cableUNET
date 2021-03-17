@@ -86,7 +86,7 @@ class AdminController extends UserController
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
         ]);
-        if ($data['toAdmin']) {
+        if (isset($data['toAdmin']) && $data['toAdmin']) {
             $user->is_admin = 1;
             $user->update();
         }

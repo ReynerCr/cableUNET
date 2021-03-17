@@ -52,7 +52,7 @@ class UserController extends Controller
         } else {
             unset($data['password']);
         }
-        if (Auth::user()->is_admin && $data['toAdmin']) {
+        if (Auth::user()->is_admin && isset($data['toAdmin']) && $data['toAdmin']) {
             $user->is_admin = 1;
             $user->update();
             unset($data['toAdmin']);

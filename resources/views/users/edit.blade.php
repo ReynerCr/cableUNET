@@ -58,7 +58,7 @@
                 name="address" required>{{ old('address', $user->address) }}</textarea><br>
         </div>
 
-        @if (Auth::user()->isAdmin())
+        @if (Auth::user()->isAdmin() && !$user->isAdmin())
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" value="toAdmin" id="toAdmin" name="toAdmin">
             <label for="toAdmin">Hacer administrador</label>
