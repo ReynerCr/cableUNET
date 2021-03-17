@@ -19,7 +19,6 @@
             </ul>
             <p>Fecha de compra: {{ $subscription->created_at }}</p>
         </section>
-        <a href="{{ route('admin.home') }}" class="btn btn-link">Regresar al panel de administración</a>
     </div>
 </div>
 @endsection

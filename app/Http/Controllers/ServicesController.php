@@ -61,9 +61,9 @@ class ServicesController extends Controller
                 $rules['name'][] = Rule::unique('telephony_services');
                 $rules['minutes'] = ['bail', 'required', 'numeric', 'integer', 'min:1'];
                 break;
-                $rules['name'][] = Rule::unique('cable_tv_services');
             case 3: // cable tv
                 $i = 1;
+                $rules['name'][] = Rule::unique('cable_tv_services');
                 $rules['ch0'] = ['bail', 'required', 'numeric', 'integer', 'exists:tv_channels,id'];
                 while (request()->has('ch' . $i)) {
                     $rules['ch' . $i] = ['bail', 'numeric', 'integer', 'exists:tv_channels,id'];

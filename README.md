@@ -8,8 +8,7 @@ Execute "php artisan key:generate"
 Configure your own virtual host.
 Setup your database and change the .env file if you have a custom database name that is not cableunet.
 And execute migrations with "php artisan migrate"
-It's ready to work.
-
+Now it's ready to work.
 
 // Spanish: student information - Español
 DATOS DE ESTUDIANTE (solo):
