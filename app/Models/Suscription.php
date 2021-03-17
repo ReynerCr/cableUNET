@@ -16,4 +16,14 @@ class Suscription extends Model
      * @var array
      */
     protected $fillable = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(ServicePackage::class, 'service_package_id');
+    }
 }

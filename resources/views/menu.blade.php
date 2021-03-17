@@ -20,24 +20,6 @@
                 <!-- Links for auth users -->
                 <li class="nav-item"><a href="/home" class="nav-link">Inicio</a></li>
 
-                <!-- TODO INICIO LISTA TEMPORAL  -->
-                @empty($authprefix)
-                {{ $authprefix = Auth::user()->is_admin ? 'admin.users':'client' }}
-                @endisset
-
-                @if($authprefix == 'admin.users')
-                <li class="nav-item"><a href="{{ route($authprefix) }}" class="nav-link">Lista</a></li>
-                @endif
-                <li class="nav-item"><a href="{{ route($authprefix.'.id.show', 3) }}" class="nav-link">show user</a>
-                </li>
-                <li class="nav-item"><a href="{{ route($authprefix.'.id.show', 7) }}" class="nav-link">show admin </a>
-                </li>
-                <li class="nav-item"><a href="{{ route($authprefix.'.id.edit', 3) }}" class="nav-link">edit user</a>
-                </li>
-                <li class="nav-item"><a href="{{ route($authprefix.'.id.edit', 7) }}" class="nav-link">edit admin</a>
-                </li>
-                <!-- TODO FIN LISTA TEMPORAL -->
-
                 <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         {{ csrf_field() }}

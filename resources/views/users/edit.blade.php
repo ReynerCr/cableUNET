@@ -57,11 +57,19 @@
             <textarea class="form-control" rows="4" cols="50" placeholder="Ingrese aquí su dirección." id="address"
                 name="address" required>{{ old('address', $user->address) }}</textarea><br>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar usuario</button>
+
+        @if (Auth::user()->isAdmin())
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" value="toAdmin" id="toAdmin" name="toAdmin">
+            <label for="toAdmin">Hacer administrador</label>
+        </div>
+        @endif
 
         @if ($user->isAdmin())
+        <p>Es un administrador.</p>
         <a href="{{ route($authprefix) }}" class="btn btn-link">Regresar al listado de usuarios</a>
         @endif
     </fieldset>
+    <button type="submit" class="btn btn-primary">Actualizar usuario</button>
 </form>
 @endsection

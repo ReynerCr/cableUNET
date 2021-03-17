@@ -138,16 +138,4 @@ class ServicesController extends Controller
         }
         return view('admin.services.show', compact('type', 'service'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($type, $id)
-    {
-        // TODO get the type and search service and delete
-        return redirect(route('admin.home'));
-    }
 }

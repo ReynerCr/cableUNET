@@ -45,12 +45,19 @@ class UserController extends Controller
             'password' => ['bail', 'nullable', 'alpha_dash', 'between:6,16'],
             'phone_number' => ['bail', 'required', 'numeric', 'digits:11'],
             'address' => ['bail', 'required', 'between:5,200'],
+            'toAdmin' => 'nullable'
         ]);
         if ($data['password'] != null) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
+        if (Auth::user()->is_admin && $data['toAdmin']) {
+            $user->is_admin = 1;
+            $user->update();
+            unset($data['toAdmin']);
+        }
+
         $user->update($data);
         return redirect(route(Auth::user()->is_admin ? 'admin.users' : 'client.' . 'id.show', $user));
     }

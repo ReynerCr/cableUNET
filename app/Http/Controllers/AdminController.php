@@ -62,10 +62,11 @@ class AdminController extends UserController
             'email' => ['bail', 'required', 'email', Rule::unique('users')],
             'password' => ['bail', 'required', 'alpha_dash', 'between:6,16'],
             'phone_number' => ['bail', 'required', 'numeric', 'digits:11'],
-            'address' => ['bail', 'required', 'between:5,200']
+            'address' => ['bail', 'required', 'between:5,200'],
+            'toAdmin' => '',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'id_card' => $data['id_card'],
@@ -74,6 +75,10 @@ class AdminController extends UserController
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
         ]);
+        if ($data['toAdmin']) {
+            $user->is_admin = 1;
+            $user->update();
+        }
         return redirect(route('admin.users'));
     }
 }

@@ -7,11 +7,15 @@
     <div class="card-body">
         <h2 class="card-title">Bienvenido {{ Auth::user()->name .' '. Auth::user()->surname }} al sistema en línea de
             CableUNET</h2>
-        <a href="" class="card-link">Adquirir un paquete de servicios</a>
-        <a href="" class="card-link">Pedir un cambio de paquete de servicios</a>
-        <a href="" class="card-link">Ver facturas mensuales</a>
-        <a href="{{ route('client.id.edit', Auth::user()->id) }}" class="card-link">Ver o editar información de
-            usuario</a>
+        <ul>
+            <li><a href="{{ route('client.packages.create') }}" class="btn btn-link">Adquirir un paquete de servicios</a></li>
+            <li><a href="" class="btn btn-link">Pedir un cambio de paquete de servicios</a></li>
+            <li><a href="" class="btn btn-link">Ver facturas mensuales</a></li>
+            <li><a href="{{ route('client.id.show', Auth::user()->id) }}" class="btn btn-link">Ver información de
+                    usuario</a></li>
+            <li><a href="{{ route('client.id.edit', Auth::user()->id) }}" class="btn btn-link">Editar información de
+                    usuario</a></li>
+        </ul>
     </div>
 </div>
 @endsection

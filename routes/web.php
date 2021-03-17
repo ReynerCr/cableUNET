@@ -33,6 +33,19 @@ Route::prefix('/cliente')->name('client')->group(function () {
     // /cliente as client
     Route::get('', [ClientController::class, 'index'])
         ->name('.home');
+
+    Route::prefix('paquetes')->name('.packages')->group(function () {
+        // /cliente/paquetes as client.packages
+        Route::get('', [ClientController::class, 'create'])
+            ->name('.create');
+
+        Route::post('', [ClientController::class, 'createId'])
+            ->name('.createId');
+
+        Route::post('registrar', [ClientController::class, 'storePackage'])
+            ->name('.store');
+    });
+
     Route::prefix('{user}')->where(['[0-9]+'])->name('.id')->group(function () {
         // /cliente/{user} as client.id
         Route::get('', [ClientController::class, 'show'])
@@ -41,6 +54,9 @@ Route::prefix('/cliente')->name('client')->group(function () {
             ->name('.update');
         Route::get('editar', [ClientController::class, 'edit'])
             ->name('.edit');
+        Route::get('{suscription}', [ClientController::class, 'showSubscription'])
+            ->name('.sub')
+            ->where(['[0-9]+']);
     });
 });
 

@@ -56,6 +56,10 @@
             <textarea class="form-control" rows="4" cols="50" placeholder="Ingrese aquí su dirección." id="address"
                 name="address" required>{{ old('address') }}</textarea><br>
         </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" value="toAdmin" id="toAdmin" name="toAdmin">
+            <label for="toAdmin">Hacer administrador</label>
+        </div>
         <button type="submit" class="btn btn-primary">Crear usuario</button>
         <a href="{{ route('admin.users') }}" class="btn btn-link">Regresar al listado de usuarios</a>
     </fieldset>

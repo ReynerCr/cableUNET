@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->is_admin;
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Suscription::class);
+    }
+
+    public function invoices()
+    {
+        return $this->belongsToMany(TvChannel::class, 'tv_plans', 'cable_tv_service_id', 'tv_channel_id');
+    }
 }

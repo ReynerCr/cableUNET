@@ -7,9 +7,6 @@ use Illuminate\Validation\Rule;
 use \App\Models\Services\InternetService;
 use \App\Models\Services\TelephonyService;
 use \App\Models\Services\CableTvService;
-use Facade\Ignition\Support\Packagist\Package;
-
-use function PHPUnit\Framework\isEmpty;
 
 class PackagesController extends Controller
 {
@@ -97,40 +94,6 @@ class PackagesController extends Controller
      */
     public function show(ServicePackage $package)
     {
-        return view('admin.services.show_package', compact('package'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('packages.show_package', compact('package'));
     }
 }

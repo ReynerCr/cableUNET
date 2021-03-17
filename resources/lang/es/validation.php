@@ -157,6 +157,7 @@ return [
         'upload_speed' => 'velocidad de subida',
         'minutes' => 'minutos',
         'address'               => 'dirección',
+        'service_package_id' => 'paquete de servicios',
         'age'                   => 'edad',
         'body'                  => 'cuerpo',
         'city'                  => 'ciudad',
