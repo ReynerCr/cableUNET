@@ -14,7 +14,6 @@ Now it's ready to work.
 DATOS DE ESTUDIANTE (solo):
 
 Nombres y apellidos: Reyner David Contreras Rojas.
-C.I: V.-26934400
 Programación II sección 02.
 
 Disponible en GitHub: https://github.com/ReynerCr/cableUNET
